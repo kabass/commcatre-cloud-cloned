@@ -71,7 +71,6 @@
       - libffi-dev  # Required for installing github3py
       - libssl-dev  # Required for pip setup tools and libcurl4-openssl-dev
       - tmux
-      - reptyr # move process into tmux session
       - unzip
       - zip
       - iotop
@@ -80,7 +79,7 @@
       - libcairo2
       - libpango1.0-0
       - auditd
-
+      ## BKA- reptyr # move process into tmux session
 # Install ntp package
 - name: Install NTP package when Chrony is not defined.
   become: yes
