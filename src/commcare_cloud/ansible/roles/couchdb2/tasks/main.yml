@@ -83,7 +83,7 @@
 
 - name: Wait for couchdb to restarted  # BKA
   ansible.builtin.wait_for:
-    port: {{ couchdb_port }}
+    port: "{{ couchdb_port }}"
     delay: 60
 
 - name: Add nodes
