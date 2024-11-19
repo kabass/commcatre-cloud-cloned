@@ -18,3 +18,10 @@
   debug:
     var: java_version
     verbosity: 2
+
+- name: Ensure the required MBeanTrustPermission is present in the java.policy file  #BKA
+  ansible.builtin.lineinfile:
+    path: /usr/lib/jvm/java-1.17.0-openjdk-amd64/lib/security/default.policy  # Adjust to the correct path
+    line: 'permission javax.management.MBeanTrustPermission "register";'
+    insertafter: 'grant {'
+    state: present
