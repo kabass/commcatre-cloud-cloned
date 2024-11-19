@@ -102,7 +102,7 @@
     user: "{{ couchdb2.username }}"
     password: "{{ couchdb2.password }}"
     force_basic_auth: true
-    status_code: 201, 412 # 412 means already set up (conflict)
+    status_code: 201, 412, 202 # 412 means already set up (conflict)  ##BKA adding 202
     body: '{}'
   when: inventory_hostname == groups.couchdb2.0
   register: result
