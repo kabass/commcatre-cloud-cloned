@@ -44,7 +44,7 @@
 - name: Download Elasticsearch 7
   become: yes
   get_url:
-    url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ elasticsearch_version }}-linux-aarch64.tar.gz"
+    url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ elasticsearch_version }}-linux-aarch64.tar.gz" ##BKA
     dest: "/home/{{ cchq_user }}/downloads/elasticsearch-{{ elasticsearch_version }}.tar.gz"
     checksum: "sha256:{{ elasticsearch_download_sha256 }}"
   when: elasticsearch_version is version('7.0.0', '>=')
