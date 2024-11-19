@@ -5,6 +5,15 @@
 - include_tasks: install_old.yml
   when: rabbitmq_version == '3.10.7-1'
 
+## BKA- adding /etc/rabbitmq directory
+- name: Create a directory /etc/rabbitmq
+  ansible.builtin.file:
+      path: /etc/rabbitmq
+      state: directory
+      mode: '0755'
+      group: root
+      owner: rabbitmq
+
 - name: Place config file
   template:
     src: "{{ item.src }}"
