@@ -83,7 +83,7 @@
 
 - name: Wait for couchdb to restarted  # BKA
   ansible.builtin.wait_for:
-    timeout: 300
+    timeout: 30
   delegate_to: localhost
 
 - name: Add nodes
