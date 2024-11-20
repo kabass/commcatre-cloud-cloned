@@ -40,7 +40,9 @@
     checksum: "sha512:{{ elasticsearch_download_sha256 }}"      #BK
   when: elasticsearch_version is version('6.0.0', '>=') and elasticsearch_version is version('7.0.0', '<')
 
-
+  https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.25-linux-x86_64.tar.gz
+  https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.25-linux-x86_64.tar.gz
+  wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.25-darwin-x86_64.tar.gz
 - name: Download Elasticsearch 7
   become: yes
   get_url:

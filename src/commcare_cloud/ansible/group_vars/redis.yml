@@ -12,9 +12,10 @@ redis_maxmemory: "{{ ansible_memory_mb.real.total // 2 }}m"
 redis_maxmemory_policy: volatile-lru
 redis_save: []
 redis_appendonly: "yes"
-redis_timeout: 300  # 5 minutes
-cluster_config:
-  cluster-enabled: "yes"
+redis_timeout: 300  # 5 minutes#Redis
+cluster_config:  #BKA
+  cluster-enabled: "no"
   cluster-config-file: "nodes.conf" # Redis internal filename, never change this
   cluster-node-timeout: "5000"
+  protected-mode: "no"
 check_master_script_path: "{{ redis_install_dir }}/redis_is_master"
