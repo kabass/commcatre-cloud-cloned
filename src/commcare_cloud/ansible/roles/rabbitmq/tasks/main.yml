@@ -1,6 +1,6 @@
 ---
 - include_tasks: install_latest.yml
-  when: rabbitmq_version == '3.10.13-1'  ## BKA- changing condition for rabbitmq installation
+  when: rabbitmq_version == '4.0.4-1'  ## BKA- changing condition for rabbitmq installation
 
 - include_tasks: install_old.yml
   when: rabbitmq_version == '3.10.7-1'
