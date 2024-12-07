@@ -41,7 +41,7 @@
   become: true
   tasks:
     - import_role:
-        name: cloudalchemy.node-exporter
+        name: cloudalchemy.node_exporter
   tags: node_exporter
 
 - name: Prometheus Haproxy Exporter
