@@ -103,16 +103,12 @@
       when: inventory_hostname == groups.elasticsearch.0
   tags: elasticsearch_exporter
 
-- name: Prometheus Postgresql Exporter
+
+- name: Prometheus Postgresql Exporter  ## BKA
   hosts: postgresql,pg_standby,citusdb
   become: true
-  vars:
-    ansible_service_mgr: "systemd"
-    postgres_exporter_datasource: "postgresql://postgres@:5432/postgres?host=/var/run/postgresql/&sslmode=disable"
-    postgres_exporter_flags: ['--auto-discover-databases','--extend.query-path="{{ postgres_exporter_home }}/queries.yml"']
-  tasks:
-    - import_role:
-        name: dimagi.commcare_prometheus.postgres_exporter
+  roles:
+    - postgres_exporter
   tags: postgres_exporter
 
 - name: Prometheus Pgbouncer Exporter

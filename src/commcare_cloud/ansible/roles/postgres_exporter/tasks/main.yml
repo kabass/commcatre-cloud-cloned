@@ -1,0 +1,40 @@
+---
+- name: Copy postgres_exporter file
+  ansible.builtin.copy:
+    src: files/postgres_exporter
+    dest: /usr/local/bin/postgres_exporter
+    owner: root
+    group: root
+    mode: "u=rwx,g=rwx,o=r"
+
+- name: Create directories postgres_exporter
+  become: yes
+  file:
+    path: "/opt/postgres_exporter"
+    owner: root
+    group: root
+    mode: "u=rwx,g=rwx,o=r"
+    state: directory
+
+- name: Copy env postgres_exporter file
+  template:
+    src: files/postgres_exporter.env.j2
+    dest: /opt/postgres_exporter/postgres_exporter.env
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copy service file
+  ansible.builtin.copy:
+    src: files/postgres_exporter.service
+    dest: /etc/systemd/system/postgres_exporter.service
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Reload postgres_exporter
+  systemd:
+    state: started
+    daemon-reload: yes
+    enabled: true
+    name: postgres_exporter
