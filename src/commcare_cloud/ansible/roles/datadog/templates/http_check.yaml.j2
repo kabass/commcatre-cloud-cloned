@@ -1,5 +1,6 @@
 init_config:
 
+## BKA
 instances:
   - name: {{ env_monitoring_id }}
     url: https://{{ SITE_HOST }}/serverup.txt
@@ -9,8 +10,11 @@ instances:
     days_critical: 10
     timeout: 30
     include_content: true
+    http_response_status_code: 200
+    content_match: 'success'
     tags:
       - check_type:serverup
+      - organization:tecsen
 {% if monitor_celery_heartbeat|default(True) %}
   - name: {{ env_monitoring_id }} Celery
     url: https://{{ SITE_HOST }}/serverup.txt?only=celery
