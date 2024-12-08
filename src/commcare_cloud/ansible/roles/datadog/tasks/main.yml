@@ -22,10 +22,29 @@
     owner: root
     group: root
 
-- name: Add new datadog apt repository
-  apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/DATADOG_APT_KEY_F14F620E.gpg] http://apt.datadoghq.com/ stable 7"
-    state: present
+
+## BKA
+- name: Datadog install prerequisite
+  become: yes
+  shell: |
+    sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
+    touch /usr/share/keyrings/datadog-archive-keyring.gpg
+    chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    cp -a /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d/
+    apt-get update
+  args:
+    executable: /bin/bash
+
+#- name: Add new datadog apt repository
+#  apt_repository:
+#    repo: "deb [signed-by=/etc/apt/keyrings/DATADOG_APT_KEY_F14F620E.gpg] http://apt.datadoghq.com/ stable 7"
+#    state: present
+
+## BKA
 
 - name: Install datadog agent
   apt:
