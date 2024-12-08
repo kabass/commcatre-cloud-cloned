@@ -21,10 +21,13 @@ UPLOAD_NAME="couchdb_${BACKUP_TYPE}_${HOSTNAME}.tar.gz"
 if [ "$COUCHDB_BACKUP_HOURLY" == True ] && [ "$BACKUP_TYPE" == "hourly" ]; 
 then
 	tar -Pzcf "{{ couch_backup_dir }}/${HOURLY_BACKUP_FILE}" "{{ couch_data_dir }}"
+	BACKUP_FILE="couchdb_${BACKUP_TYPE}_${HOUR}.tar.gz"
+
 	# Remove old backups of this backup type of last x mins
 	find {{ couch_backup_dir }} -mmin "+${MINUTES_TO_RETAIN_BACKUPS}" -name "couchdb_${BACKUP_TYPE}_*" ! -path "*weekly*" ! -path "*daily*" -delete;
 else
 	tar -Pzcf "{{ couch_backup_dir }}/${BACKUP_FILE}" "{{ couch_data_dir }}"
+	BACKUP_FILE="couchdb_${BACKUP_TYPE}_${TODAY}.tar.gz"
 
 	# Remove old backups of this backup type
 	find {{ couch_backup_dir }} -daystart -mtime "+${DAYS_TO_RETAIN_BACKUPS}" -name "couchdb_${BACKUP_TYPE}_*" -delete
