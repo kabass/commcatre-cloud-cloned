@@ -4,7 +4,7 @@
 #
 {% set group_tags = group_names|select('in', monitoring_groups)|sort %}
 
-dd_url: https://app.datadoghq.com
+dd_url: {{ DATADOG_URL }} ## BKA https://app.datadoghq.com
 api_key: {{ DATADOG_API_KEY }}
 tags: 
 - environment:{{ env_monitoring_id }}
