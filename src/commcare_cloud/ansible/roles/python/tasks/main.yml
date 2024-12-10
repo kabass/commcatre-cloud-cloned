@@ -20,3 +20,4 @@
       - setuptools
     state: latest
     executable: pip3  # Use /usr/bin/pip3 this time only
+
